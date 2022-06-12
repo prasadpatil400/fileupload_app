@@ -5,10 +5,12 @@ from pydantic import BaseModel
 # from typing import Optional, List
 #from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-
+import requests
 from flask import Flask, session
 import tempfile
+import os
 from apps import database, pre_designed_urls, schemas, model, crud
+basepath='/Users/hash/'
 
 engine = database.engine
 
@@ -37,16 +39,16 @@ def get_db():
 
 @app.post("/upload")
 async def upload(base: schemas.Base = Depends(), file: UploadFile = File(...), db: session = Depends(get_db)):
-    finename = pre_designed_urls.generate(file.filename)
-    temp = file.filename
-    print(temp)
-    with open(temp,'r') as p:
-        p.read()
-        print(p.read())
-    print("********",finename)
+    data = (await file.read()).decode("utf-8")
+    path = basepath+file.filename
+    f = open(path, "a")
+    f.write(data)
+    f.close()
+    URL = pre_designed_urls.generate(file.filename,basepath)
+    print("********",URL)
     received_data = base.dict()
     print(received_data)
-    return crud.upload(db=db, user=base, file=finename)
+    return crud.upload(db=db, user=base, file=URL)
 
 
 #@app.get("/", response_class=HTMLResponse)
