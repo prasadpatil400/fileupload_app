@@ -16,9 +16,9 @@ engine = database.engine
 
 model.Base.metadata.create_all(bind=engine)
 
-app1 = Flask(__name__)
+#app1 = Flask(__name__)
 
-#app = FastAPI()
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
