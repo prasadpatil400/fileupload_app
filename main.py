@@ -16,6 +16,8 @@ engine = database.engine
 
 model.Base.metadata.create_all(bind=engine)
 
+app1 = Flask(__name__)
+
 app = FastAPI()
 
 app.add_middleware(
@@ -60,3 +62,7 @@ async def upload(base: schemas.Base = Depends(), file: UploadFile = File(...), d
 #     email=user.email
 #     password=user.password
 #     return {"email":email, "passord":password}
+
+
+if __name__ == "__main__":
+    app.run()
