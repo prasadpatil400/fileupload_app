@@ -18,7 +18,7 @@ model.Base.metadata.create_all(bind=engine)
 
 app1 = Flask(__name__)
 
-app = FastAPI()
+#app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -64,5 +64,5 @@ async def upload(base: schemas.Base = Depends(), file: UploadFile = File(...), d
 #     return {"email":email, "passord":password}
 
 
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
