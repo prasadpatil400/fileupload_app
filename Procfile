@@ -1,1 +1,1 @@
-web: gunicorn app:app --port 8000
+web: gunicorn app:app
