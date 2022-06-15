@@ -1,15 +1,15 @@
 from fastapi import Form, File, UploadFile, Request, FastAPI, Depends
-from typing import List
-from fastapi.responses import HTMLResponse
-from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
+from flask import Flask, session
+from apps import database, pre_designed_urls, schemas, model, crud
+# from typing import List
+# from fastapi.responses import HTMLResponse
+# from pydantic import BaseModel
 # from typing import Optional, List
 #from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
-import requests
-from flask import Flask, session
-import tempfile
-import os
-from apps import database, pre_designed_urls, schemas, model, crud
+# import requests
+# import tempfile
+# import os
 basepath='/Users/hash/'
 
 engine = database.engine
@@ -64,5 +64,5 @@ async def upload(base: schemas.Base = Depends(), file: UploadFile = File(...), d
 #     return {"email":email, "passord":password}
 
 
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run(debug=True)
